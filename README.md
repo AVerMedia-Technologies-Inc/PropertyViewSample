@@ -12,7 +12,7 @@ Please included stylesheet and javascript link in the `<head>` section of HTML p
     <title>My first plugin</title>
     <link rel="stylesheet" href="avt.css">
     <script src="js/jquery.min.js"></script>
-    <script src="js/ax_websocket.js"></script>
+    <script src="js/ax_socket.js"></script>
     <script src="js/main_property.js"></script>
 </head>
 <div class="avt-wrapper">
@@ -20,26 +20,26 @@ Please included stylesheet and javascript link in the `<head>` section of HTML p
 </div>
 ```
 
-You can include our recommended css stylesheet `avt.css` which contains styles of all our components.
+You can include our recommended css stylesheet [avt.css](css/avt.css) which contains styles of all our components.
 
-Before you start coding javascript you need include library `jquery.min.js` and our helper file `ax_socket.js` .
+Before you start coding javascript you need include library `jquery.min.js` and our helper file [ax_socket.js](js/ax_socket.js).
 
-The file `ax_socket.js` contains a registration function and all receiving/sending event function.
+The file [ax_socket.js](js/ax_socket.js) contains a registration function and all receiving/sending event function.
 
 For more information, you can refer to [ document Registration Flow ](https://github.com/AVerMedia-Technologies-Inc/CreatorCentralSDK/wiki/Registration-Flow).
 
 You can create your javascript file to write the event handling and element behavior.
 
-Here, we create the `property_main.js` as an example to do the event handling and element behavior.
+Here, we create the [property_main.js](js/property_main.js) as an example to do the event handling and element behavior.
 
-There is a sample contains file `avt.css`, `ax_socket.js`, `property_main.js` and all html component.
+There is a sample contains file [avt.css](css/avt.css), [ax_socket.js](js/ax_socket.js), [property_main.js](js/property_main.js) and all html component.
 
-You can download our [sample]() to modify it as you want.
+You can clone our project as a template and modify it as you wish.
 
 
 ## Trigger HTML
 
-Our component needs the event `sendToPropertyView` to trigger the complete element.
+Our component needs the event [sendToPropertyView](https://github.com/AVerMedia-Technologies-Inc/CreatorCentralSDK/wiki/Send-Events-To-Creator-Central#send-to-property-view) to trigger the complete element.
 
 The format as the following example:
 
@@ -49,7 +49,7 @@ The format as the following example:
     "event": "sendToPropertyView",
     "context": uniqueIdentifier,
     "payload": {
-        ...
+        
     }
 }
 ```
@@ -64,7 +64,7 @@ The parameter `payload` is the content for controlling the element's value or st
 
 ## Sending Messages to a package
 
-To send message to package, you need add `sendToPackage` function in `property_main.js`. 
+To send message to package, you need add [sendToPackage](https://github.com/AVerMedia-Technologies-Inc/CreatorCentralSDK/wiki/Send-Events-To-Creator-Central#send-to-package) function in `property_main.js`. 
 
 Examples are as follows:
 ```js
@@ -770,7 +770,7 @@ propertyEvents.on('set_checkbox', data => {
 
 * Javascript
 
-```json
+```javascript
 propertyEvents.on('set_texteditor', data => {
     $('#' + data.label_name.id).text(data.label_name.name);
     let textItem = $('#' + data.texteditor.id);
