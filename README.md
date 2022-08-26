@@ -1,6 +1,6 @@
 # Web Example
 
-We recommend using our integrated CSS `avt.css`. It demonstrates all supported HTML elements.
+We recommend using our integrated CSS [avt.css](css/avt.css) which demonstrates all supported HTML elements.
 
 ## Getting Start
 
@@ -26,7 +26,7 @@ Before you start coding javascript you need include library `jquery.min.js` and 
 
 The file [ax_socket.js](js/ax_socket.js) contains a registration function and all receiving/sending event function.
 
-For more information, you can refer to [ document Registration Flow ](https://github.com/AVerMedia-Technologies-Inc/CreatorCentralSDK/wiki/Registration-Flow).
+For more information, you can refer to [Creator Central SDK/Registration Flow](https://github.com/AVerMedia-Technologies-Inc/CreatorCentralSDK/wiki/Registration-Flow) or [Creator Central SDK/Property View](https://github.com/AVerMedia-Technologies-Inc/CreatorCentralSDK/wiki/Property-View).
 
 You can create your javascript file to write the event handling and element behavior.
 
