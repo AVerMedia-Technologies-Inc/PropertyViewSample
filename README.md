@@ -6,7 +6,7 @@ We recommend using our integrated CSS `avt.css`. It demonstrates all supported H
 
 Please included stylesheet and javascript link in the `<head>` section of HTML page.
 
-```
+```html
 <head>
     <meta charset="utf-8" />
     <title>My first plugin</title>
@@ -43,7 +43,7 @@ Our component needs the event `sendToPropertyView` to trigger the complete eleme
 
 The format as the following example:
 
-```
+```json
 {
     "widget" : "com.avermedia.example.widget1",
     "event": "sendToPropertyView",
@@ -56,7 +56,7 @@ The format as the following example:
 
 You need add a subscribed function in `property_main.js` to receive the event.
 
-```
+```js
 AVT_CREATOR_CENTRAL.on('sendToPropertyView', receive_from_widget);
 ```
 
@@ -67,10 +67,10 @@ The parameter `payload` is the content for controlling the element's value or st
 To send message to package, you need add `sendToPackage` function in `property_main.js`. 
 
 Examples are as follows:
-```
-...
+```js
+// ...
 const sendToPackage = AVT_CREATOR_CENTRAL_API.sendToPackage;
-...
+// ...
 sendToPackage({
     'action' : 'get_select_account',
     'option_id': option_id,
@@ -81,7 +81,7 @@ sendToPackage({
 ## Components
 
 The main view is wrapped in a HTML-node with the class avt-wrapper.
-```
+```html
 <div class="avt-wrapper">
     ...
     Write your content
@@ -93,11 +93,11 @@ The main view is wrapped in a HTML-node with the class avt-wrapper.
 
 #### Basic input
 
-![alt](.\assets\Snipaste_2022-08-23_16-23-46.png)
+![alt](assets/Snipaste_2022-08-23_16-23-46.png)
 
 * HTML
 
-```
+```html
 <div class="avt-item">
     <div class="avt-item-label" id="input_text_1_name">Title</div>
     <div class="input-btn-wrap">
@@ -107,7 +107,7 @@ The main view is wrapped in a HTML-node with the class avt-wrapper.
 ```
 
 * Javascript
-```
+```javascript
 propertyEvents.on('set_input_text', data => {
     let lableItem = $('#'+data.label_name.id);
     lableItem.text(data.label_name.name);
@@ -134,7 +134,7 @@ propertyEvents.on('set_input_text', data => {
 
 * Trigger Event
 
-```
+```json
 {
     "event": "sendToPropertyView",
     "context": uniqueIdentifier,
@@ -166,11 +166,11 @@ propertyEvents.on('set_input_text', data => {
 
 #### Input with button or icon
 
-![alt](.\assets\Snipaste_2022-08-23_17-25-15.png)
+![alt](assets/Snipaste_2022-08-23_17-25-15.png)
 
 * HTML
 
-```
+```html
 <div class="avt-item">      
     <div class="avt-item-label" id="input_text_2_name">2.input field + Show tooltip</div>
     <div class="input-btn-wrap">
@@ -182,9 +182,9 @@ propertyEvents.on('set_input_text', data => {
 ```
 
 * Javascript
-```
+```javascript
 propertyEvents.on('set_input_text', data => {
-    .... 
+    // .... 
 
     for(let intxtbtn of ['input_text_button_1', 'input_text_button_2']) {    
         if(data.hasOwnProperty('input_text_button_1')) {
@@ -208,7 +208,7 @@ propertyEvents.on('set_input_text', data => {
                     });
                 } else {
                     $(input_button).on('click', e => {
-                        ...
+                        // ...
                     });
                 }
             }
@@ -219,7 +219,7 @@ propertyEvents.on('set_input_text', data => {
 
 * Trigger Event
 
-```
+```json
 {
     "event": "sendToPropertyView",
     "context": uniqueIdentifier,
@@ -264,10 +264,10 @@ propertyEvents.on('set_input_text', data => {
 
 #### Input with inline style
 
-![img](./assets/Snipaste_2022-08-24_17-06-52.png)
+![img](assets/Snipaste_2022-08-24_17-06-52.png)
 
 * HTML
-```
+```html
 <div class="avt-item">
     <div class="input-row">
         <div class="avt-item-label" id="input_text_row_1_name">Title side by side 1</div>
@@ -284,7 +284,7 @@ propertyEvents.on('set_input_text', data => {
 ![img](./assets/Snipaste_2022-08-24_17-08-11.png)
 
 * HTML
-```
+```html
 <div class="avt-item">
     <div class="input-2-input-row">
         <div class="avt-item-label" id="input_text_row_2_name">Title side by side 2</div>
@@ -301,7 +301,7 @@ propertyEvents.on('set_input_text', data => {
 ```
 
 * Trigger Event
-```
+```json
 {
     "event": "sendToPropertyView",
     "context": uniqueIdentifier,
@@ -343,11 +343,11 @@ propertyEvents.on('set_input_text', data => {
 
 #### Basic Combobox
 
-![alt](.\assets\2022-8-2317-53-15.png)
+![alt](assets/2022-8-2317-53-15.png)
 
 * HTML
 
-```
+```html
 <div class="avt-item">
     <div class="avt-first-item-label" id="select_1_name">Title</div>
     <select class="avt-item-value select" id="select_1_options"></select>
@@ -357,7 +357,7 @@ propertyEvents.on('set_input_text', data => {
 * Javascript
   
 
-```
+```javascript
 propertyEvents.on('set_select_item', data => {
     $('#'+data.select_name.id).text(data.select_name.name);
     let option_id = data.select_options.id;
@@ -378,7 +378,7 @@ propertyEvents.on('set_select_item', data => {
 
 * Trigger Event
 
-```
+```json
 {
     "event": "sendToPropertyView",
     "context": uniqueIdentifier,
@@ -431,11 +431,11 @@ propertyEvents.on('set_select_item', data => {
 
 #### Combobox with file browsing
 
-![alt](.\assets\Snipaste_2022-08-24_11-46-16.png)
+![alt](assets/Snipaste_2022-08-24_11-46-16.png)
 
 * HTML
 
-```
+```html
 <div class="avt-item">
     <div class="avt-item-label" id="select_1_name">3.Combobox  + file browsing </div>
     <div class="select-btn-wrap">
@@ -446,11 +446,9 @@ propertyEvents.on('set_select_item', data => {
 ```
 
 * Javascript
-  
-
-```
+```javascript
 propertyEvents.on('set_select_item', data => {
-    ...
+    // ...
 
     if(data['select_button_1']['action'] == 'file_upload') {
         let upfile = select_option.next();
@@ -469,7 +467,7 @@ propertyEvents.on('set_select_item', data => {
 
 * Trigger Event
 
-```
+```json
 {
     "event": "sendToPropertyView",
     "context": uniqueIdentifier,
@@ -515,7 +513,7 @@ propertyEvents.on('set_select_item', data => {
 
 * HTML
 
-```
+```html
 <div class="avt-item">
     <div class="avt-item-label" id="select_7_name">Title</div>
     <div class="select-btn-wrap">
@@ -529,7 +527,7 @@ propertyEvents.on('set_select_item', data => {
 
 * Javascript
 
-```
+```javascript
 propertyEvents.on('set_select_item', data => {
     ...
 
@@ -559,7 +557,7 @@ propertyEvents.on('set_select_item', data => {
 
 * Trigger Event
 
-```
+```json
 {
     "event": "sendToPropertyView",
     "context": uniqueIdentifier,
@@ -614,7 +612,7 @@ propertyEvents.on('set_select_item', data => {
 ![img](./assets/Snipaste_2022-08-24_18-07-46.png)
 
 * HTML
-```
+```html
 <div class="avt-item">
     <div class="avt-item-label" id="radio_1_name">Radio button - Choose one from three(Toggle) </div>
     <div class="avt-item-value radio_wrap" id="radio_1_options"></div>
@@ -623,7 +621,7 @@ propertyEvents.on('set_select_item', data => {
 
 * Javascript
 
-```
+```javascript
 propertyEvents.on('set_radio_button', data => {
     
     $('#'+data.radio_name.id).text(data.radio_name.name);
@@ -650,7 +648,7 @@ propertyEvents.on('set_radio_button', data => {
 
 * Trigger Event
 
-```
+```json
 {
     "event": "sendToPropertyView",
     "context": uniqueIdentifier,
@@ -702,7 +700,7 @@ propertyEvents.on('set_radio_button', data => {
 ![img](./assets/Snipaste_2022-08-24_17-14-52.png)
 
 * HTML
-```
+```html
 <div class="avt-item">
     <div class="avt-item-label" id="checkbox_1_name">Transition</div>
     <label class="avt-checkbox" id="checkbox_1">
@@ -714,7 +712,7 @@ propertyEvents.on('set_radio_button', data => {
 
 * Javascript
 
-```
+```javascript
 propertyEvents.on('set_checkbox', data => {
     $('#' + data.checkbox.id + ' > span').text(data.checkbox.name);
     let checkbox = $('#' + data.checkbox.id + ' > input[type="checkbox"]');
@@ -722,14 +720,14 @@ propertyEvents.on('set_checkbox', data => {
     checkbox.prop("checked", checked);
 
     checkbox.on('click', e => {
-        ...
+        // ...
     });
 })
 ```
 
 * Trigger Event
 
-```
+```json
 {
     "event": "sendToPropertyView",
     "context": uniqueIdentifier,
@@ -761,7 +759,7 @@ propertyEvents.on('set_checkbox', data => {
 ![img](./assets/Snipaste_2022-08-24_17-12-34.png)
 
 * HTML
-```
+```html
 <div class="avt-item">
     <div class="avt-item-label" id="texteditor_1_name">text area + character limit</div>
     <div id="texteditor_1" class="texteditor-row-wrap">
@@ -772,7 +770,7 @@ propertyEvents.on('set_checkbox', data => {
 
 * Javascript
 
-```
+```json
 propertyEvents.on('set_texteditor', data => {
     $('#' + data.label_name.id).text(data.label_name.name);
     let textItem = $('#' + data.texteditor.id);
@@ -803,7 +801,7 @@ propertyEvents.on('set_texteditor', data => {
 
 * Trigger Event
 
-```
+```json
 {
     "event": "sendToPropertyView",
     "context": uniqueIdentifier,
@@ -840,7 +838,7 @@ propertyEvents.on('set_texteditor', data => {
 ![img](./assets/Snipaste_2022-08-24_17-11-48.png)
 
 * HTML
-```
+```html
 <div class="avt-item">
     <div class="avt-item-label" id="texteditor_2_name">text area + toolbar</div>
     <div id="texteditor_2" class="texteditor-row-wrap">
@@ -852,9 +850,9 @@ propertyEvents.on('set_texteditor', data => {
 
 * Javascript
 
-```
+```javascript
 propertyEvents.on('set_texteditor', data => {
-    ....
+    // ....
 
     for (const key in data) {
         if (key.includes('set_texteditor_button')) {
@@ -882,7 +880,7 @@ propertyEvents.on('set_texteditor', data => {
 
 * Trigger Event
 
-```
+```json
 {
     "event": "sendToPropertyView",
     "context": uniqueIdentifier,
@@ -922,7 +920,7 @@ propertyEvents.on('set_texteditor', data => {
 ![img](./assets/Snipaste_2022-08-24_16-53-54.png)
 * HTML
 
-```
+```html
 <div class="avt-item">
     <div class="avt-item-label" id="timer12_1_name">time input-1</div>
     <div class="set-timer-12" id="timer12_1">
@@ -950,8 +948,7 @@ propertyEvents.on('set_texteditor', data => {
 ```
 
 * Javascript
-```
-
+```javascript
 function setTimerSelectOptions(select, bound){ 
     for(let i=0; i < bound; i++){
         if(i < 10){
@@ -1017,7 +1014,7 @@ propertyEvents.on('set_timer', data => {
 
 
 * Trigger Event
-```
+```json
 {
     "event": "sendToPropertyView",
     "context": uniqueIdentifier,
