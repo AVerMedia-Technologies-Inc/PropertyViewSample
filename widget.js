@@ -405,6 +405,37 @@ AVT_CREATOR_CENTRAL.on('sendToPackage', data => {
         }
     });
 
+    // ==================================  Button ================================== 
+    sendToPropertyView({
+        'action': 'set_button',
+        'align': 'center',
+        'button_1': {
+            'id': 'button_1_1',
+            'name': 'Button-1_1',
+        }
+    });
+
+    sendToPropertyView({
+        'action': 'set_button',
+        'align': 'left',
+        'button_1': {
+            'id': 'button_2_1',
+            'name': 'Button-2_1',
+        },
+        'button_2': {
+            'id': 'button_2_2',
+            'name': 'Button-2_2',
+        },
+    });
+
+    sendToPropertyView({
+        'action': 'set_button',
+        'align': 'right',
+        'button_1': {
+            'id': 'button_3_1',
+            'name': 'Button-3_1',
+        }
+    });
     // ==================================  Checkbox ================================== 
     sendToPropertyView({
         'action': 'set_checkbox',
@@ -418,24 +449,24 @@ AVT_CREATOR_CENTRAL.on('sendToPackage', data => {
 
     // ==================================  Textarea ================================== 
     sendToPropertyView({
-        'action' : 'set_texteditor',
+        'action': 'set_texteditor',
         'label_name': {
             'id': 'texteditor_1_name',
             'name': 'Title',
-        },      
+        },
         'texteditor': {
             'id': 'texteditor_1',
             'text': 'Enter some text',
-            'max_length' : 500,
+            'max_length': 500,
         }
     });
 
     sendToPropertyView({
-        'action' : 'set_texteditor',
+        'action': 'set_texteditor',
         'label_name': {
             'id': 'texteditor_2_name',
             'name': 'Title',
-        },      
+        },
         'texteditor': {
             'id': 'texteditor_2',
             'text': 'Enter some text',
@@ -451,6 +482,7 @@ AVT_CREATOR_CENTRAL.on('sendToPackage', data => {
     });
 
     // ==================================  Integrated elements ================================== 
+    // =============================  Timer ========================== 
     sendToPropertyView({
         'action': 'set_timer',
         'type': 12, //12 or 24
@@ -481,6 +513,32 @@ AVT_CREATOR_CENTRAL.on('sendToPackage', data => {
         }
     });
 
+    // =============================  Label + Button ========================== 
+    sendToPropertyView({
+        'action': 'set_lable_item',
+        'label_name': {
+            'id': 'label_1_name',
+            'name': 'Label-1 Name',
+        }
+    });
 
+    sendToPropertyView({
+        'action': 'set_lable_item',
+        'align': 'right',
+        'label_name': {
+            'id': 'label_2_name',
+            'name': 'Label-2 Name',
+            'font_size': '3px',
+            'color': 'yellow',
+        },
+        'label_button_1': {
+            'id': 'label_2_button_1',
+            'src': 'images/component_btn_addnew_block_nc_m.svg',
+        },
+        'label_button_2': {
+            'id': 'label_3_button_2',
+            'src': 'images/component_btn_addnew_block_nc_m.svg',
+        }
+    });
 
 });

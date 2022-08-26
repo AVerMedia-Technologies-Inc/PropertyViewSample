@@ -36,7 +36,6 @@ There is a sample contains file [avt.css](css/avt.css), [ax_socket.js](js/ax_soc
 
 You can clone our project as a template and modify it as you wish.
 
-
 ## Trigger HTML
 
 Our component needs the event [sendToPropertyView](https://github.com/AVerMedia-Technologies-Inc/CreatorCentralSDK/wiki/Send-Events-To-Creator-Central#send-to-property-view) to trigger the complete element.
@@ -45,12 +44,12 @@ The format as the following example:
 
 ```json
 {
-    "widget" : "com.avermedia.example.widget1",
-    "event": "sendToPropertyView",
-    "context": uniqueIdentifier,
-    "payload": {
-        
-    }
+	"widget" : "com.avermedia.example.widget1",
+	"event": "sendToPropertyView",
+	"context": uniqueIdentifier,
+	"payload": {
+		
+	}
 }
 ```
 
@@ -64,23 +63,25 @@ The parameter `payload` is the content for controlling the element's value or st
 
 ## Sending Messages to a package
 
-To send message to package, you need add [sendToPackage](https://github.com/AVerMedia-Technologies-Inc/CreatorCentralSDK/wiki/Send-Events-To-Creator-Central#send-to-package) function in `property_main.js`. 
+To send message to package, you need add [sendToPackage](https://github.com/AVerMedia-Technologies-Inc/CreatorCentralSDK/wiki/Send-Events-To-Creator-Central#send-to-package) function in `property_main.js` . 
 
 Examples are as follows:
+
 ```js
 // ...
 const sendToPackage = AVT_CREATOR_CENTRAL_API.sendToPackage;
 // ...
 sendToPackage({
-    'action' : 'get_select_account',
+    'action': 'get_select_account',
     'option_id': option_id,
     'option_val': e.target.value,
-});  
+});
 ```
 
 ## Components
 
 The main view is wrapped in a HTML-node with the class avt-wrapper.
+
 ```html
 <div class="avt-wrapper">
     ...
@@ -107,23 +108,24 @@ The main view is wrapped in a HTML-node with the class avt-wrapper.
 ```
 
 * Javascript
+
 ```javascript
 propertyEvents.on('set_input_text', data => {
-    let lableItem = $('#'+data.label_name.id);
+    let lableItem = $('#' + data.label_name.id);
     lableItem.text(data.label_name.name);
     let oldVal = '';
 
-    if(data.input_text) {
-    let input_text = $('#' + data.input_text.id);
+    if (data.input_text) {
+        let input_text = $('#' + data.input_text.id);
 
-    if(data.input_text && data.input_text.hasOwnProperty('text')) {
-        oldVal = data.input_text.text;
-        input_text.val(data.input_text.text);
-    }
+        if (data.input_text && data.input_text.hasOwnProperty('text')) {
+            oldVal = data.input_text.text;
+            input_text.val(data.input_text.text);
+        }
 
-    input_text.on("change keyup paste", function() {
+        input_text.on("change keyup paste", function() {
             let currentVal = $(input_text).val();
-            if(currentVal == oldVal) {
+            if (currentVal == oldVal) {
                 return; //check to prevent multiple simultaneous triggers
             }
             oldVal = currentVal;
@@ -136,19 +138,19 @@ propertyEvents.on('set_input_text', data => {
 
 ```json
 {
-    "event": "sendToPropertyView",
-    "context": uniqueIdentifier,
-    "payload": {
-        "action": "set_input_text",
-        "label_name": {
-            "id": "input_text_1_name",
-            "name": "Title"
-        },
-        "input_text": {
-            "id": "input_text_1",
-            "text": "Monitor"
-        }
-    }
+	"event": "sendToPropertyView",
+	"context": uniqueIdentifier,
+	"payload": {
+		"action": "set_input_text",
+		"label_name": {
+			"id": "input_text_1_name",
+			"name": "Title"
+		},
+		"input_text": {
+			"id": "input_text_1",
+			"text": "Monitor"
+		}
+	}
 }
 ```
 
@@ -171,7 +173,7 @@ propertyEvents.on('set_input_text', data => {
 * HTML
 
 ```html
-<div class="avt-item">      
+<div class="avt-item">
     <div class="avt-item-label" id="input_text_2_name">2.input field + Show tooltip</div>
     <div class="input-btn-wrap">
         <input class="avt-item-value" type="text" id="input_text_2">
@@ -182,16 +184,17 @@ propertyEvents.on('set_input_text', data => {
 ```
 
 * Javascript
+
 ```javascript
 propertyEvents.on('set_input_text', data => {
     // .... 
 
-    for(let intxtbtn of ['input_text_button_1', 'input_text_button_2']) {    
-        if(data.hasOwnProperty('input_text_button_1')) {
-            let input_button = $('#'+data[intxtbtn].id);
-            if(input_button && input_button.length > 0) {
+    for (let intxtbtn of ['input_text_button_1', 'input_text_button_2']) {
+        if (data.hasOwnProperty('input_text_button_1')) {
+            let input_button = $('#' + data[intxtbtn].id);
+            if (input_button && input_button.length > 0) {
                 let visibility = (data[intxtbtn]['visibility'] && data[intxtbtn]['visibility'].match(/hidden|none|hide|false/)) ? 'hidden' : '';
-                if(data[intxtbtn]['tooltip'] && !visibility) {
+                if (data[intxtbtn]['tooltip'] && !visibility) {
                     input_button.wrapAll('<span class="tooltip">');
                     input_button.after('<span class="tooltiptext">' + data[intxtbtn]['tooltip'] + '</span>');
                 }
@@ -199,12 +202,12 @@ propertyEvents.on('set_input_text', data => {
                 input_button.css('opacity', 100);
                 input_button = input_button[0];
                 input_button.src = data[intxtbtn].src;
-                if(data[intxtbtn]['action'] == 'file_upload') {
+                if (data[intxtbtn]['action'] == 'file_upload') {
                     let upfile = input_text.next();
                     $(input_button).on('click', e => upfile.trigger('click'));
                     input_text.attr('disabled', true);
-                    $(upfile).change(e => { 
-                        input_text.val(upfile.val()); 
+                    $(upfile).change(e => {
+                        input_text.val(upfile.val());
                     });
                 } else {
                     $(input_button).on('click', e => {
@@ -221,28 +224,28 @@ propertyEvents.on('set_input_text', data => {
 
 ```json
 {
-    "event": "sendToPropertyView",
-    "context": uniqueIdentifier,
-    "payload": {
-        "action": "set_input_text",
-        "label_name": {
-            "id": "input_text_2_name",
-            "name": "Title"
-        },
-        "input_text": {
-            "id": "input_text_2",
-            "text": "Monitor"
-        },
-        "input_text_button_1": {
-            "id": "input_text_2_button_1",
-            "src": "images/component_btn_infor_block_n.svg",
-            "tooltip": "Tooltip message"
-        },
-        "input_text_button_2": {
-            "id": "input_text_2_button_2",
-            "src": "images/component_btn_refresh_block_b_n.svg"
-        },
-    }
+	"event": "sendToPropertyView",
+	"context": uniqueIdentifier,
+	"payload": {
+		"action": "set_input_text",
+		"label_name": {
+			"id": "input_text_2_name",
+			"name": "Title"
+		},
+		"input_text": {
+			"id": "input_text_2",
+			"text": "Monitor"
+		},
+		"input_text_button_1": {
+			"id": "input_text_2_button_1",
+			"src": "images/component_btn_infor_block_n.svg",
+			"tooltip": "Tooltip message"
+		},
+		"input_text_button_2": {
+			"id": "input_text_2_button_2",
+			"src": "images/component_btn_refresh_block_b_n.svg"
+		},
+	}
 }
 ```
 
@@ -267,13 +270,14 @@ propertyEvents.on('set_input_text', data => {
 ![img](assets/Snipaste_2022-08-24_17-06-52.png)
 
 * HTML
+
 ```html
 <div class="avt-item">
     <div class="input-row">
         <div class="avt-item-label" id="input_text_row_1_name">Title side by side 1</div>
         <div class="input-btn-wrap">
-        <input class="avt-item-value" type="text" id="input_text_row_1">
-        <img id="input_text_row_1_button_1" class="avt-btn">
+            <input class="avt-item-value" type="text" id="input_text_row_1">
+            <img id="input_text_row_1_button_1" class="avt-btn">
         </div>
     </div>
 </div>
@@ -284,58 +288,60 @@ propertyEvents.on('set_input_text', data => {
 ![img](./assets/Snipaste_2022-08-24_17-08-11.png)
 
 * HTML
+
 ```html
 <div class="avt-item">
     <div class="input-2-input-row">
         <div class="avt-item-label" id="input_text_row_2_name">Title side by side 2</div>
-            <div class="input-btn-wrap">
-                <div class="avt-item-sub-label" id="input_text_row_2_sub_name_1">1</div>
-                <input type="text" id="input_text_row_sub_1">
-                <div class="avt-item-sub-label" id="input_text_row_2_sub_name_2">2</div>
-                <input type="text" id="input_text_row_sub_2">
-                <img id="input_text_row_2_button_1" class="avt-btn">
-                <img id="input_text_row_2_button_2" class="avt-btn">
+        <div class="input-btn-wrap">
+            <div class="avt-item-sub-label" id="input_text_row_2_sub_name_1">1</div>
+            <input type="text" id="input_text_row_sub_1">
+            <div class="avt-item-sub-label" id="input_text_row_2_sub_name_2">2</div>
+            <input type="text" id="input_text_row_sub_2">
+            <img id="input_text_row_2_button_1" class="avt-btn">
+            <img id="input_text_row_2_button_2" class="avt-btn">
         </div>
     </div>
 </div>
 ```
 
 * Trigger Event
+
 ```json
 {
-    "event": "sendToPropertyView",
-    "context": uniqueIdentifier,
-    "payload": {
-        "action": "set_input_text",
-        "label_name": {
-            "id": "input_text_row_2_name",
-            "name": "Size"
-        },
-        "label_name_1": {
-            "id": "input_text_row_2_sub_name_1",
-            "name": "W"
-        },
-        "label_name_2": {
-            "id": "input_text_row_2_sub_name_2",
-            "name": "H"
-        },
-        "input_text_1": {
-            "id": "input_text_row_sub_1",
-            "text": "800"
-        },
-        "input_text_2": {
-            "id": "input_text_row_sub_2",
-            "text": "600"
-        },
-        "input_text_button_1": {
-            "id": "input_text_row_2_button_1",
-            "src": "images/component_btn_restore_block_b_n.svg"
-        },
-        "input_text_button_2": {
-            "id": "input_text_row_2_button_2",
-            "src": "images/component_btn_restore_block_b_n.svg"
-        }
-    }
+	"event": "sendToPropertyView",
+	"context": uniqueIdentifier,
+	"payload": {
+		"action": "set_input_text",
+		"label_name": {
+			"id": "input_text_row_2_name",
+			"name": "Size"
+		},
+		"label_name_1": {
+			"id": "input_text_row_2_sub_name_1",
+			"name": "W"
+		},
+		"label_name_2": {
+			"id": "input_text_row_2_sub_name_2",
+			"name": "H"
+		},
+		"input_text_1": {
+			"id": "input_text_row_sub_1",
+			"text": "800"
+		},
+		"input_text_2": {
+			"id": "input_text_row_sub_2",
+			"text": "600"
+		},
+		"input_text_button_1": {
+			"id": "input_text_row_2_button_1",
+			"src": "images/component_btn_restore_block_b_n.svg"
+		},
+		"input_text_button_2": {
+			"id": "input_text_row_2_button_2",
+			"src": "images/component_btn_restore_block_b_n.svg"
+		}
+	}
 }
 ```
 
@@ -359,17 +365,17 @@ propertyEvents.on('set_input_text', data => {
 
 ```javascript
 propertyEvents.on('set_select_item', data => {
-    $('#'+data.select_name.id).text(data.select_name.name);
+    $('#' + data.select_name.id).text(data.select_name.name);
     let option_id = data.select_options.id;
-    let select_option = $('#'+option_id);
+    let select_option = $('#' + option_id);
     let options = data.select_options.options;
 
     select_option.html('');
 
-    for(let i=0; i < options.length; i++) {
+    for (let i = 0; i < options.length; i++) {
         select_option.append('<option value="' + options[i].value + '">' + options[i].name + '</option>');
     }
-    if(data.select_options.hasOwnProperty('default_value')) {
+    if (data.select_options.hasOwnProperty('default_value')) {
         select_option.val(data.select_options.default_value);
     }
 
@@ -380,39 +386,38 @@ propertyEvents.on('set_select_item', data => {
 
 ```json
 {
-    "event": "sendToPropertyView",
-    "context": uniqueIdentifier,
-    "payload": {
-        "action": "set_select_item",
-        "select_name": {
-            "id": "select_1_name",
-            "name": "Title"
-        },
-        "select_options": {
-            "id": "select_1_options",
-            "options": [
-                {
-                    "value": "monitor",
-                    "name": "Monitor"
-                },
-                {
-                    "value": "select-1-value-1",
-                    "name": "Combobox-1-option-1"
-                },
-                {
-                    "value": "select-1-value-2",
-                    "name": "Combobox-1-option-2"
-                },
-                {
-                    "value": "select-1-value-3",
-                    "name": "Combobox-1-option-3"
-                }
-            ]
-        }
-    }
+	"event": "sendToPropertyView",
+	"context": uniqueIdentifier,
+	"payload": {
+		"action": "set_select_item",
+		"select_name": {
+			"id": "select_1_name",
+			"name": "Title"
+		},
+		"select_options": {
+			"id": "select_1_options",
+			"options": [
+				{
+					"value": "monitor",
+					"name": "Monitor"
+				},
+				{
+					"value": "select-1-value-1",
+					"name": "Combobox-1-option-1"
+				},
+				{
+					"value": "select-1-value-2",
+					"name": "Combobox-1-option-2"
+				},
+				{
+					"value": "select-1-value-3",
+					"name": "Combobox-1-option-3"
+				}
+			]
+		}
+	}
 }
 ```
-
 
 * Payload Description
 
@@ -428,7 +433,6 @@ propertyEvents.on('set_select_item', data => {
 | select_options.options[i].value | Indicate options value                 |
 | select_options.options[i].name  | Indicate options text                  |
 
-
 #### Combobox with file browsing
 
 ![alt](assets/Snipaste_2022-08-24_11-46-16.png)
@@ -437,28 +441,29 @@ propertyEvents.on('set_select_item', data => {
 
 ```html
 <div class="avt-item">
-    <div class="avt-item-label" id="select_1_name">3.Combobox  + file browsing </div>
+    <div class="avt-item-label" id="select_1_name">3.Combobox + file browsing </div>
     <div class="select-btn-wrap">
         <select class="avt-item-value select" id="select_1_options"></select>
         <input class="avt-item-value" type="file" style="display:none">
-    </div>      
+    </div>
 </div>
 ```
 
 * Javascript
+
 ```javascript
 propertyEvents.on('set_select_item', data => {
     // ...
 
-    if(data['select_button_1']['action'] == 'file_upload') {
+    if (data['select_button_1']['action'] == 'file_upload') {
         let upfile = select_option.next();
         $(select_button).on('click', e => upfile.trigger('click'));
-        $(upfile).change(e => { 
+        $(upfile).change(e => {
             let file = upfile.val();
-            if($(select_option).find('option[value="' + file +'"]').length == 0) {
-                select_option.append('<option value="'+ file +'">' + file + '</option>');
+            if ($(select_option).find('option[value="' + file + '"]').length == 0) {
+                select_option.append('<option value="' + file + '">' + file + '</option>');
             }
-            select_option.val(file); 
+            select_option.val(file);
         });
     }
 
@@ -469,26 +474,36 @@ propertyEvents.on('set_select_item', data => {
 
 ```json
 {
-    "event": "sendToPropertyView",
-    "context": uniqueIdentifier,
-    "payload": {
-        "action": "set_select_item",
-        "select_name": {
-            "id": "select_1_name",
-            "name": "Title"
-        },
-        "select_options": {
-            "id": "select_1_options",
-            "options": [...]
-        },
-        "select_button_1": {
-            "id": "select_1_button_1",
-            "src": "images/component_btn_point_block_b_n.svg",
-            "action": "file_upload"
-        }
-    }
+	"event": "sendToPropertyView",
+	"context": uniqueIdentifier,
+	"payload": {
+		"action": "set_select_item",
+		"select_name": {
+			"id": "select_1_name",
+			"name": "Title"
+		},
+		"select_options": {
+			"id": "select_1_options",
+			"options": [
+				{
+					"value": "monitor",
+					"name": "Monitor"
+				},
+				{
+					"value": "select-1-value-1",
+					"name": "Combobox-1-option-1"
+				}
+			]
+		},
+		"select_button_1": {
+			"id": "select_1_button_1",
+			"src": "images/component_btn_point_block_b_n.svg",
+			"action": "file_upload"
+		}
+	}
 }
 ```
+
 * Payload Description
 
 | Parameter                       | Description                             |
@@ -521,7 +536,7 @@ propertyEvents.on('set_select_item', data => {
         <img id="select_7_button_1" class="avt-btn" src="images/component_btn_addnew_block_b_n.svg" style="opacity: 100;">
         <img id="select_7_button_2" class="avt-btn" src="images/component_btn_refresh_block_b_n.svg" style="opacity: 100;">
         <img id="select_7_button_3" class="avt-btn" src="images/component_btn_fault.svg" style="opacity: 100;">
-    </div>  
+    </div>
 </div>
 ```
 
@@ -531,12 +546,12 @@ propertyEvents.on('set_select_item', data => {
 propertyEvents.on('set_select_item', data => {
     ...
 
-    for(let selbtn of ['select_button_1', 'select_button_2', 'select_button_3']) {
-        if(data.hasOwnProperty(selbtn)) {
-            let select_button = $('#'+data[selbtn].id);
-            if(select_button && select_button.length > 0) {
+    for (let selbtn of ['select_button_1', 'select_button_2', 'select_button_3']) {
+        if (data.hasOwnProperty(selbtn)) {
+            let select_button = $('#' + data[selbtn].id);
+            if (select_button && select_button.length > 0) {
                 let visibility = (data[selbtn]['visibility'] && data[selbtn]['visibility'].match(/hidden|none|hide|false/)) ? 'hidden' : '';
-                if(data[selbtn]['tooltip'] && !visibility) {
+                if (data[selbtn]['tooltip'] && !visibility) {
                     select_button.wrapAll('<span class="tooltip">');
                     select_button.after('<span class="tooltiptext">' + data[selbtn]['tooltip'] + '</span>');
                 }
@@ -546,7 +561,7 @@ propertyEvents.on('set_select_item', data => {
                 select_button.src = data[selbtn].src;
 
                 $(select_button).on('click', e => {
-                    console.log('click changed', e.target); 
+                    console.log('click changed', e.target);
                 });
             }
         }
@@ -559,32 +574,32 @@ propertyEvents.on('set_select_item', data => {
 
 ```json
 {
-    "event": "sendToPropertyView",
-    "context": uniqueIdentifier,
-    "payload": {
-        "action": "set_select_item",
-        "select_name": {
-            "id": "select_7_name",
-            "name": "Title"
-        },
-        "select_options": {
-            "id": "select_7_options",
-            "options": [...]
-        },
-        "select_button_1": {
-            "id": "select_7_button_1",
-            "src": "images/component_btn_addnew_block_b_n.svg",
-            "tooltip": "Tooltip message"
-        },
-        "select_button_2": {
-            "id": "select_7_button_2",
-            "src": "images/component_btn_refresh_block_b_n.svg"
-        },
-        "select_button_3": {
-            "id": "select_7_button_3",
-            "src": "images/component_btn_fault.svg"
-        }
-    }
+	"event": "sendToPropertyView",
+	"context": uniqueIdentifier,
+	"payload": {
+		"action": "set_select_item",
+		"select_name": {
+			"id": "select_7_name",
+			"name": "Title"
+		},
+		"select_options": {
+			"id": "select_7_options",
+			"options": [...]
+		},
+		"select_button_1": {
+			"id": "select_7_button_1",
+			"src": "images/component_btn_addnew_block_b_n.svg",
+			"tooltip": "Tooltip message"
+		},
+		"select_button_2": {
+			"id": "select_7_button_2",
+			"src": "images/component_btn_refresh_block_b_n.svg"
+		},
+		"select_button_3": {
+			"id": "select_7_button_3",
+			"src": "images/component_btn_fault.svg"
+		}
+	}
 }
 ```
 
@@ -606,12 +621,12 @@ propertyEvents.on('set_select_item', data => {
 | select_button_[n].src           | Indicate a image link of button or icon    |
 | select_button_[n].tooltip       | Show tooltip when hover the button or icon |
 
-
 ### Radio
 
 ![img](./assets/Snipaste_2022-08-24_18-07-46.png)
 
 * HTML
+
 ```html
 <div class="avt-item">
     <div class="avt-item-label" id="radio_1_name">Radio button - Choose one from three(Toggle) </div>
@@ -623,24 +638,24 @@ propertyEvents.on('set_select_item', data => {
 
 ```javascript
 propertyEvents.on('set_radio_button', data => {
-    
-    $('#'+data.radio_name.id).text(data.radio_name.name);
+
+    $('#' + data.radio_name.id).text(data.radio_name.name);
     let radio_id = data.radio_options.id;
-    let radio_option = $('#'+radio_id);
+    let radio_option = $('#' + radio_id);
 
     radio_option.html('');
 
     let options = data.radio_options.options;
-    for(let i=0; i < options.length; i++) {
+    for (let i = 0; i < options.length; i++) {
         radio_option.append('<label class="avt-item-label"><input type="radio" name="' + data.radio_options.id + '" value="' + options[i].value + '">' + options[i].name + '</input></label>');
     }
 
-    if(data.radio_options.hasOwnProperty('default_value')) {
+    if (data.radio_options.hasOwnProperty('default_value')) {
         $('input:radio[name="' + radio_id + '"]').filter('[value="' + data.radio_options.default_value + '"]').attr('checked', true);
     }
 
     radio_option.on('change', e => {
-        let radio_val = $('input[name="' + radio_id + '"]:checked').val(); 
+        let radio_val = $('input[name="' + radio_id + '"]:checked').val();
     });
 
 })
@@ -650,33 +665,33 @@ propertyEvents.on('set_radio_button', data => {
 
 ```json
 {
-    "event": "sendToPropertyView",
-    "context": uniqueIdentifier,
-    "payload": {
-        "action": "set_radio_button",
-        "radio_name": {
-            "id": "radio_1_name",
-            "name": "radio name"
-        },
-        "radio_options": {
-            "id": "radio_1_options",
-            "default_value": "radio-1-value-2",
-            "options": [
-                {
-                    "value": "radio-1-value-1",
-                    "name": "Toggle"
-                },
-                {
-                    "value": "radio-1-value-2",
-                    "name": "On"
-                },
-                {
-                    "value": "radio-1-value-3",
-                    "name": "Off"
-                }
-            ]
-        }
-    }
+	"event": "sendToPropertyView",
+	"context": uniqueIdentifier,
+	"payload": {
+		"action": "set_radio_button",
+		"radio_name": {
+			"id": "radio_1_name",
+			"name": "radio name"
+		},
+		"radio_options": {
+			"id": "radio_1_options",
+			"default_value": "radio-1-value-2",
+			"options": [
+				{
+					"value": "radio-1-value-1",
+					"name": "Toggle"
+				},
+				{
+					"value": "radio-1-value-2",
+					"name": "On"
+				},
+				{
+					"value": "radio-1-value-3",
+					"name": "Off"
+				}
+			]
+		}
+	}
 }
 ```
 
@@ -694,18 +709,18 @@ propertyEvents.on('set_radio_button', data => {
 | radio_options.options[i].value | Indicate options value                |
 | radio_options.options[i].name  | Indicate options text                 |
 
-
 ### Checkbox
 
 ![img](./assets/Snipaste_2022-08-24_17-14-52.png)
 
 * HTML
+
 ```html
 <div class="avt-item">
     <div class="avt-item-label" id="checkbox_1_name">Transition</div>
     <label class="avt-checkbox" id="checkbox_1">
-      <input type="checkbox">
-      <span>Override transition if already in scene</span>
+        <input type="checkbox">
+        <span>Override transition if already in scene</span>
     </label>
 </div>
 ```
@@ -716,7 +731,7 @@ propertyEvents.on('set_radio_button', data => {
 propertyEvents.on('set_checkbox', data => {
     $('#' + data.checkbox.id + ' > span').text(data.checkbox.name);
     let checkbox = $('#' + data.checkbox.id + ' > input[type="checkbox"]');
-    let checked = (data.checkbox.checked?true:false);
+    let checked = (data.checkbox.checked ? true : false);
     checkbox.prop("checked", checked);
 
     checkbox.on('click', e => {
@@ -729,16 +744,16 @@ propertyEvents.on('set_checkbox', data => {
 
 ```json
 {
-    "event": "sendToPropertyView",
-    "context": uniqueIdentifier,
-    "payload": {
-        "action": "set_checkbox",
-        "checkbox": {
-            "id": "checkbox_1",
-            "name": "Override transition if already in scene",
-            "checked": true
-        }
-    }
+	"event": "sendToPropertyView",
+	"context": uniqueIdentifier,
+	"payload": {
+		"action": "set_checkbox",
+		"checkbox": {
+			"id": "checkbox_1",
+			"name": "Override transition if already in scene",
+			"checked": true
+		}
+	}
 }
 ```
 
@@ -752,6 +767,77 @@ propertyEvents.on('set_checkbox', data => {
 | checkbox.name    | Indicate checkbox label text           |
 | checkbox.checked | Set checkbox checked status            |
 
+### Button
+
+![img](./assets/Snipaste_2022-08-26_15-11-31.png)
+
+* HTML
+
+```html
+<div class="avt-item">
+    <div>
+        <button id="button_1_1" class="avt-button">Button1_1</button>
+    </div>
+</div>
+```
+
+* Javascript
+
+```javascript
+propertyEvents.on('set_button', data => {
+    let is_margined = false;
+    let btn = 'button_1';
+    if (data.hasOwnProperty(btn)) {
+        let button = $('#' + data[btn].id);
+        button.text(data[btn].name);
+        if (!is_margined) {
+            is_margined = true;
+            let partentDiv = $(button).parent();
+            if (data.align == 'right') {
+                partentDiv.css('margin-right', '');
+                partentDiv.css('margin-left', 'auto');
+            } else if (data.align == 'center') {
+                partentDiv.css('margin-right', 'auto');
+                partentDiv.css('margin-left', 'auto');
+            } else {
+                partentDiv.css('margin-right', 'auto');
+                partentDiv.css('margin-left', '');
+            }
+        }
+        $(button).on('click', e => {
+            setSaveData('button_id', data[btn].id, {
+                'action': 'on_button_clicked',
+                'button_id': data[btn].id,
+                'clicked': true,
+            });
+        });
+    }
+});
+```
+
+* Trigger Event
+
+```json
+{
+    "action": "set_button",
+    "align": "center",
+    "button_1": {
+        "id": "button_1_1",
+        "name": "Button-1_1",
+    }
+}
+```
+
+* Payload Description
+
+| Parameter       | Description                    |
+| --------------- | ------------------------------ |
+| action          | A action of trigger            |
+| align           | Set button's align             |
+| button_[n]      | Container of button parameters |
+| button_[n].id   | Indicate button id             |
+| button_[n].name | Indicate button text           |
+
 ### Textarea
 
 #### Textarea with text length limit
@@ -759,6 +845,7 @@ propertyEvents.on('set_checkbox', data => {
 ![img](./assets/Snipaste_2022-08-24_17-12-34.png)
 
 * HTML
+
 ```html
 <div class="avt-item">
     <div class="avt-item-label" id="texteditor_1_name">text area + character limit</div>
@@ -777,19 +864,19 @@ propertyEvents.on('set_texteditor', data => {
     let texteditor = $('#' + data.texteditor.id + ' > textarea');
     let oldVal = "";
 
-    if(data.texteditor.hasOwnProperty('text')) {
+    if (data.texteditor.hasOwnProperty('text')) {
         texteditor.val(data.texteditor.text);
     }
 
-    if(data.texteditor.hasOwnProperty('max_length')) {
+    if (data.texteditor.hasOwnProperty('max_length')) {
         texteditor.attr('maxlength', data.texteditor.max_length);
         textItem.find('.avt-item-value-helper').remove();
-        texteditor.after('<label class="avt-item-value-helper">'+ texteditor.val().length + '/' + data.texteditor.max_length +'</label>');
+        texteditor.after('<label class="avt-item-value-helper">' + texteditor.val().length + '/' + data.texteditor.max_length + '</label>');
     }
 
     texteditor.on("change keyup paste", function() {
         let currentVal = $(texteditor).val();
-        if(currentVal == oldVal) {
+        if (currentVal == oldVal) {
             return; //check to prevent multiple simultaneous triggers
         }
         oldVal = currentVal;
@@ -803,20 +890,20 @@ propertyEvents.on('set_texteditor', data => {
 
 ```json
 {
-    "event": "sendToPropertyView",
-    "context": uniqueIdentifier,
-    "payload": {
-        "action": "set_texteditor",
-        "label_name": {
-            "id": "texteditor_1_name",
-            "name": "Title"
-        },
-        "texteditor": {
-            "id": "texteditor_1",
-            "text": "Enter some text",
-            "max_length": 500
-        }
-    }
+	"event": "sendToPropertyView",
+	"context": uniqueIdentifier,
+	"payload": {
+		"action": "set_texteditor",
+		"label_name": {
+			"id": "texteditor_1_name",
+			"name": "Title"
+		},
+		"texteditor": {
+			"id": "texteditor_1",
+			"text": "Enter some text",
+			"max_length": 500
+		}
+	}
 }
 ```
 
@@ -838,6 +925,7 @@ propertyEvents.on('set_texteditor', data => {
 ![img](./assets/Snipaste_2022-08-24_17-11-48.png)
 
 * HTML
+
 ```html
 <div class="avt-item">
     <div class="avt-item-label" id="texteditor_2_name">text area + toolbar</div>
@@ -856,10 +944,10 @@ propertyEvents.on('set_texteditor', data => {
 
     for (const key in data) {
         if (key.includes('set_texteditor_button')) {
-            let input_button = $('#'+data[key].id);
-            if(input_button && input_button.length > 0) {
+            let input_button = $('#' + data[key].id);
+            if (input_button && input_button.length > 0) {
                 let visibility = (data[key]['visibility'] && data[key]['visibility'].match(/hidden|none|hide|false/)) ? 'hidden' : '';
-                if(data[key]['tooltip'] && !visibility) {
+                if (data[key]['tooltip'] && !visibility) {
                     input_button.wrapAll('<span class="tooltip">');
                     input_button.after('<span class="tooltiptext">' + data[key]['tooltip'] + '</span>');
                 }
@@ -871,7 +959,7 @@ propertyEvents.on('set_texteditor', data => {
                     ....
                 });
             }
-            
+
         }
     }
 
@@ -882,42 +970,43 @@ propertyEvents.on('set_texteditor', data => {
 
 ```json
 {
-    "event": "sendToPropertyView",
-    "context": uniqueIdentifier,
-    "payload": {
-        "action": "set_texteditor",
-        "label_name": {
-            "id": "texteditor_2_name",
-            "name": "Title"
-        },
-        "texteditor": {
-            "id": "texteditor_2",
-            "text": "Enter some text"
-        },
-        "set_texteditor_button": {
-            "id": "texteditor_text_3_button_2",
-            "src": "images/component_btn_refresh_block_b_n.svg"
-        }
-    }
+	"event": "sendToPropertyView",
+	"context": uniqueIdentifier,
+	"payload": {
+		"action": "set_texteditor",
+		"label_name": {
+			"id": "texteditor_2_name",
+			"name": "Title"
+		},
+		"texteditor": {
+			"id": "texteditor_2",
+			"text": "Enter some text"
+		},
+		"set_texteditor_button": {
+			"id": "texteditor_text_3_button_2",
+			"src": "images/component_btn_refresh_block_b_n.svg"
+		}
+	}
 }
 ```
 
 * Payload Description
 
-| Parameter             | Description                        |
-| --------------------- | ---------------------------------- |
-| action                | A action of trigger                |
-| label_name            | Container of label parameters      |
-| label_name.id         | Indicate label id                  |
-| label_name.name       | Indicate label text                |
-| texteditor            | Container of texteditor parameters |
-| texteditor.id         | Indicate texteditor id             |
+| Parameter       | Description                        |
+| --------------- | ---------------------------------- |
+| action          | A action of trigger                |
+| label_name      | Container of label parameters      |
+| label_name.id   | Indicate label id                  |
+| label_name.name | Indicate label text                |
+| texteditor      | Container of texteditor parameters |
+| texteditor.id   | Indicate texteditor id             |
 
 ### Integrated elements
 
 #### Timer
 
 ![img](./assets/Snipaste_2022-08-24_16-53-54.png)
+
 * HTML
 
 ```html
@@ -929,10 +1018,10 @@ propertyEvents.on('set_texteditor', data => {
         <select class="avt-item-value time_collection select"></select>
         <div class=""></div>
         <select class="avt-item-value time_collection select">
-        <option value="AM">AM</option>
-        <option value="PM">PM</option>
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
         </select>
-    </div>      
+    </div>
 </div>
 <div class="avt-item">
     <div class="avt-item-label" id="timer24_1_name">time input-2</div>
@@ -948,41 +1037,42 @@ propertyEvents.on('set_texteditor', data => {
 ```
 
 * Javascript
+
 ```javascript
-function setTimerSelectOptions(select, bound){ 
-    for(let i=0; i < bound; i++){
-        if(i < 10){
+function setTimerSelectOptions(select, bound) {
+    for (let i = 0; i < bound; i++) {
+        if (i < 10) {
             select.append(`<option value="0${i}">0${i}</option>`);
-        }else{
+        } else {
             select.append(`<option value="${i}">${i}</option>`);
         }
     };
-} 
+}
 
 propertyEvents.on('set_timer', data => {
-    let lableItem = $('#'+data.label_name.id);
+    let lableItem = $('#' + data.label_name.id);
     lableItem.text(data.label_name.name);
 
     let hr, min, sec, ampm;
     let type = data.type;
     let timer = $('#' + data.timer.id + ' select.time_collection');
-    if(+type == 12) {
+    if (+type == 12) {
         hr = $(timer[0]);
         setTimerSelectOptions(hr, 13);
-        if(data.timer['hr']) { 
-            hr.val(data.timer['hr']); 
+        if (data.timer['hr']) {
+            hr.val(data.timer['hr']);
         }
         min = $(timer[1]);
         setTimerSelectOptions(min, 60);
-        if(data.timer['min']) { 
-            min.val(data.timer['min']); 
+        if (data.timer['min']) {
+            min.val(data.timer['min']);
         }
-        ampm = $(timer[2]); 
-        if(data.timer['ampm']) { 
-            ampm.val(data.timer['ampm']); 
+        ampm = $(timer[2]);
+        if (data.timer['ampm']) {
+            ampm.val(data.timer['ampm']);
         }
-        
-        for(let timer_item of [hr, min, ampm]) {
+
+        for (let timer_item of [hr, min, ampm]) {
             timer_item.change(e => {
                 ....
             });
@@ -990,20 +1080,20 @@ propertyEvents.on('set_timer', data => {
     } else {
         hr = $(timer[0]);
         setTimerSelectOptions(hr, 24);
-        if(data.timer['hr']) { 
-            hr.val(data.timer['hr']); 
+        if (data.timer['hr']) {
+            hr.val(data.timer['hr']);
         }
         min = $(timer[1]);
         setTimerSelectOptions(min, 60);
-        if(data.timer['min']) { 
-            min.val(data.timer['min']); 
+        if (data.timer['min']) {
+            min.val(data.timer['min']);
         }
-        sec = $(timer[2]); 
+        sec = $(timer[2]);
         setTimerSelectOptions(sec, 60);
-        if(data.timer['sec']) { 
-            sec.val(data.timer['sec']); 
+        if (data.timer['sec']) {
+            sec.val(data.timer['sec']);
         }
-        for(let timer_item of [hr, min, sec]) {
+        for (let timer_item of [hr, min, sec]) {
             timer_item.change(e => {
                 ....
             });
@@ -1012,23 +1102,23 @@ propertyEvents.on('set_timer', data => {
 });
 ```
 
-
 * Trigger Event
+
 ```json
 {
-    "event": "sendToPropertyView",
-    "context": uniqueIdentifier,
-    "payload": {
-        "action": "set_timer",
-        "type": 12,
-        "label_name": {
-            "id": "timer12_1_name",
-            "name": "Set time"
-        },
-        "timer": {
-            "id": "timer12_1"
-        }
-    }
+	"event": "sendToPropertyView",
+	"context": uniqueIdentifier,
+	"payload": {
+		"action": "set_timer",
+		"type": 12,
+		"label_name": {
+			"id": "timer12_1_name",
+			"name": "Set time"
+		},
+		"timer": {
+			"id": "timer12_1"
+		}
+	}
 }
 ```
 
@@ -1044,4 +1134,101 @@ propertyEvents.on('set_timer', data => {
 | timer           | Container of timer parameters      |
 | timer.id        | Indicate timer id                  |
 
+#### Label and Button
 
+![img](assets/Snipaste_2022-08-26_15-49-16.png)
+
+* HTML
+
+```html
+<div class="avt-item">
+    <div>
+        <span class="avt-small-label" id="label_2_name"></span>
+        <img id="label_2_button_1" class='avt-btn'>
+        <img id="label_3_button_2" class='avt-btn'>
+    </div>
+</div>
+```
+
+* Javascript
+
+```javascript
+propertyEvents.on('set_lable_item', data => {
+    let lableItem = $('#' + data.label_name.id);
+    lableItem.text(data.label_name.name);
+    if (data.label_name.hasOwnProperty('font_size')) {
+        lableItem.css('font-size', data.label_name.font_size);
+    }
+    if (data.label_name.hasOwnProperty('color')) {
+        lableItem.css('color', data.label_name.color);
+    }
+
+    let partentDiv = $(lableItem).parent();
+    if (data.align == 'right') {
+        partentDiv.css('margin-left', 'auto');
+    } else {
+        partentDiv.css('margin-left', '');
+    }
+    for (let labelbtn of ['label_button_1', 'label_button_2']) {
+        if (data.hasOwnProperty(labelbtn)) {
+            let label_button = $('#' + data[labelbtn].id);
+            if (label_button && label_button.length > 0) {
+                let visibility = (data[labelbtn]['visibility'] && data[labelbtn]['visibility'].match(/hidden|none|hide|false/)) ? 'hidden' : '';
+                if (data[labelbtn]['tooltip'] && !visibility) {
+                    label_button.wrapAll('<span class="tooltip">');
+                    label_button.after('<span class="tooltiptext">' + data[labelbtn]['tooltip'] + '</span>');
+                }
+                label_button.css('visibility', visibility);
+                label_button.css('opacity', 100);
+                label_button = label_button[0];
+                label_button.src = data[labelbtn].src;
+                $(label_button).on('click', e => {
+                    setSaveData('button_id', data[labelbtn].id, {
+                        'action': 'on_button_clicked',
+                        'button_id': data[labelbtn].id,
+                        'clicked': true,
+                    });
+                });
+            }
+        }
+    }
+})
+```
+
+* Trigger Event
+
+```json
+{
+    "action": "set_lable_item",
+    "align": "right",
+    "label_name": {
+        "id": "label_2_name",
+        "name": "Label-2 Name",
+        "font_size": "3px",
+        "color": "yellow",
+    },
+    "label_button_1": {
+        "id": "label_2_button_1",
+        "src": "images/component_btn_addnew_block_nc_m.svg",
+    },
+    "label_button_2": {
+        "id": "label_3_button_2",
+        "src": "images/component_btn_addnew_block_nc_m.svg",
+    }
+}
+```
+
+* Payload Description
+
+| Parameter             | Description                    |
+| --------------------- | ------------------------------ |
+| action                | A action of trigger            |
+| align                 | Set align of Label item        |
+| label_name            | Container of label parameters  |
+| label_name.id         | Indicate label id              |
+| label_name.name       | Indicate label text            |
+| label_name.font_size  | Set label text's style         |
+| label_name.color      | Set label text's style         |
+| label_button_[n]      | Container of button parameters |
+| label_button_[n].id   | Indicate button id             |
+| label_button_[n].name | Indicate button text           |

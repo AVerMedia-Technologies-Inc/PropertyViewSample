@@ -21,14 +21,6 @@ AVT_CREATOR_CENTRAL.on('propertyViewDidAppear', data => {debugLog(data)});
 AVT_CREATOR_CENTRAL.on('propertyViewDidDisappear', data => {debugLog(data)});
 
 let saveData = [];
-
-function _setSaveData(idKey, id, data) {
-	console.log(data)
-	setWidgetSettings({
-		'saveData' : [data]
-	});
-}
-
 function setSaveData(idKey, id, data) {
 	let hasKey = false;
 	for (const i in saveData) {
@@ -43,17 +35,6 @@ function setSaveData(idKey, id, data) {
 	setWidgetSettings({
 		'saveData' : saveData
 	});
-}
-
-function getSaveData(idKey, id) {
-	let result;
-	for (const i in saveData) {
-		if (Object.hasOwnProperty.call(saveData[i], idKey) && saveData[i][idKey] === id) {
-			result = saveData[i];
-		}
-	}
-
-	return result;
 }
 
 function property_main(data) {
@@ -99,9 +80,7 @@ propertyEvents.on('set_select_item', data => {
 		select_option.prop('disabled', false);
 	}
 	
-	// setSaveData('option_id', option_id, defaultData);
 	select_option.on('change', e => {
-		// console.log('select changed', e.target);
 		setSaveData('option_id', option_id,{
 			'action' : 'get_select_option',
 			'option_id': option_id,
@@ -154,7 +133,6 @@ propertyEvents.on('set_select_item', data => {
 })
 
 propertyEvents.on('set_select_option', data => {
-	// console.log('set_select_option', data)
 	$('#'+data.option_id).val(data.option_val);
 })
 
@@ -186,9 +164,7 @@ propertyEvents.on('set_radio_button', data => {
 		defaultData['option_val'] = data.radio_options.default_value;
 	}
 	
-	// setSaveData('button_id', radio_id, defaultData);
 	radio_option.on('change', e => {
-		// console.log('radio_option', e.target.val());
 		let radio_val = $('input[name="' + radio_id + '"]:checked').val(); 
 		setSaveData('button_id', radio_id, {
 			'action' : 'get_radio_option',
@@ -228,7 +204,6 @@ propertyEvents.on('set_lable_item', data => {
 				label_button = label_button[0];
 				label_button.src = data[labelbtn].src;
 				$(label_button).on('click', e => {
-					// console.log('click changed', e.target);
 					setSaveData('button_id', data[labelbtn].id,{
 						'action' : 'on_button_clicked',
 						'button_id': data[labelbtn].id,
@@ -261,7 +236,6 @@ propertyEvents.on('set_button', data => {
 				}				
 			}
 			$(button).on('click', e => {
-				// console.log('click changed', e.target);
 				setSaveData('button_id', data[btn].id,{
 					'action' : 'on_button_clicked',
 					'button_id': data[btn].id,
@@ -270,7 +244,7 @@ propertyEvents.on('set_button', data => {
 			});			
 		}
 	}
-})
+});
 
 
 propertyEvents.on('set_checkbox', data => {
@@ -283,10 +257,8 @@ propertyEvents.on('set_checkbox', data => {
 		'checkbox_id': data.checkbox.id,
 		'checked': checked, 			
 	}
-	// setSaveData('checkbox_id', data.checkbox.id, retData);
 	checkbox.on('click', e => {
 		retData['checked'] = $(checkbox).prop('checked');
-		// setSaveData('checkbox_id', data.checkbox.id, retData);
 	});
 })
 
@@ -313,7 +285,6 @@ propertyEvents.on('set_texteditor', data => {
 		texteditor.after('<label class="avt-item-value-helper">'+ texteditor.val().length + '/' + data.texteditor.max_length +'</label>');
 	}
 
-	// setSaveData('texteditor_id', data.texteditor.id, defaultData);
 	texteditor.on("change keyup paste", function() {
 		let currentVal = $(texteditor).val();
 		if(currentVal == oldVal) {
@@ -369,7 +340,7 @@ propertyEvents.on('set_number', data => {
 		numberEditor.val(data.default_value);
 		defaultData['text_content'] = data.default_value;
 	}
-	// setSaveData('number_id', data.number.id, defaultData);
+	
 	numberEditor.on("change keyup paste", function() {
 			let currentVal = $(numberEditor).val();
 			if(currentVal == oldVal) {
@@ -399,15 +370,12 @@ propertyEvents.on('set_input_text', data => {
 			'input_content': '', 		
 		};
 
-		//處理 default text
 		if(data.input_text && data.input_text.hasOwnProperty('text')) {
 			oldVal = data.input_text.text;
 			input_text.val(data.input_text.text);
 			retData['input_content'] = data.input_text.text;
 		}
-		// setSaveData('input_text_id', data.input_text.id, retData);
 
-		//處理輸入
 		input_text.on("change keyup paste", function() {
 				let currentVal = $(input_text).val();
 				if(currentVal == oldVal) {
@@ -428,7 +396,6 @@ propertyEvents.on('set_input_text', data => {
 		}
 	}
 
-	//處理sub輸入
 	for (const key in data) {
 		if (key.includes('input_text_')) {
 			let input_sub_text = $('#'+data[key].id);
@@ -437,8 +404,6 @@ propertyEvents.on('set_input_text', data => {
 				input_sub_text.val(data[key].text);
 				_oldVal = data[key].text;
 
-
-				//處理輸入
 				input_sub_text.on("change keyup paste", function() {
 					let currentVal = $(this).val();
 					if(currentVal == _oldVal) {
@@ -516,7 +481,7 @@ propertyEvents.on('set_timer', data => {
 	let hr, min, sec, ampm;
 	let type = data.type;
 	let timer = $('#' + data.timer.id + ' select.time_collection');
-	if(+type == 12) { //12小時制
+	if(+type == 12) {
 		hr = $(timer[0]);
 		setTimerSelectOptions(hr, 13);
 		if(data.timer['hr']) { 
@@ -535,7 +500,6 @@ propertyEvents.on('set_timer', data => {
 		retData['hr'] = hr.val();
 		retData['min'] = min.val();
 		retData['ampm'] = ampm.val();
-		// setSaveData('timer_id', data.timer.id, retData);
 		
 		//Save data onchange
 		for(let timer_item of [hr, min, ampm]) {
@@ -562,11 +526,6 @@ propertyEvents.on('set_timer', data => {
 		if(data.timer['sec']) { 
 			sec.val(data.timer['sec']); 
 		}		
-		//Save data
-		retData['hr'] = hr.val();
-		retData['min'] = min.val();
-		retData['sec'] = sec.val();
-		// setSaveData('timer_id', data.timer.id, retData);
 
 		//Save data onchange
 		for(let timer_item of [hr, min, sec]) {
