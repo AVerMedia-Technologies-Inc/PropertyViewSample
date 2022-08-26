@@ -1,0 +1,40 @@
+{
+    "Author": "AVerMedia",
+    "Description": "Example widget",
+    "Name": "Example",
+    "UUID": "com.avermedia.example",
+    "Icon": "images/0101_avermedia.svg",
+    "URL": "https://www.avermedia.com/gaming/creatorcentral",
+    "Version": "1.0.2.0",
+    "Runtime": {
+        "mac": {
+            "type": "web",
+            "target": "package.html",
+            "MinimumVersion": "11.0"
+        },
+        "win": {
+            "type": "web",
+            "target": "package.html",
+            "MinimumVersion": "10"
+        }
+    },
+    "CreatorCentral": {
+        "MinimumVersion": "1.1.2.4",
+        "SDKVersion": 2
+    },
+    "Widgets": [
+        {
+            "Name": "Example_1",
+            "Icon": "images/0102_nexus.svg",
+            "Tooltip": "Example",
+            "UUID": "com.avermedia.example.example1",
+            "PropertyViewPath": "property.html",
+            "States": [
+                {
+                    "Image": "images/0102_nexus.svg",
+                    "Title": "Example"
+                }
+            ]
+        }
+    ]
+}

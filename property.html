@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Template Property</title>
+	<link rel="stylesheet" href="css/avt.css">
+</head>
+
+<body oncontextmenu="return false;">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/ax_sock.js"></script>
+	<script src="js/property_main.js"></script>
+	<div class="avt-wrapper">
+		<h3>input field</h3>
+		<!-- ================   input field  ======================== -->
+		<div class="avt-item">
+			<div class="avt-item-label" id="input_text_1_name">1. input field</div>
+			<div class="input-btn-wrap">
+				<input class="avt-item-value" type="text" id="input_text_1">
+			</div>
+		</div>
+
+		<div class="avt-item">
+			<div class="avt-item-label" id="input_text_2_name">2.input field + Show tooltip</div>
+			<div class="input-btn-wrap">
+				<input class="avt-item-value" type="text" id="input_text_2">
+				<img id="input_text_2_button_1" class='avt-btn'>
+			</div>
+		</div>
+
+		<div class="avt-item">
+			<div class="avt-item-label" id="input_text_3_name">3.input field + file browsing + hidden warning icon</div>
+			<div class="input-btn-wrap">
+				<input class="avt-item-value" type="text" id="input_text_3">
+				<input class="avt-item-value" type="file" style="display:none">
+				<img id="input_text_3_button_1" class='avt-btn'>
+			</div>
+		</div>
+		<div class="avt-item">
+			<div class="avt-item-label" id="input_text_4_name">4.input field + file browsing + delete + hidden warning
+				icon
+			</div>
+			<div class="input-btn-wrap">
+				<input class="avt-item-value" type="text" id="input_text_4">
+				<input class="avt-item-value" type="file" style="display:none">
+				<img id="input_text_4_button_1" class='avt-btn'>
+				<img id="input_text_4_button_2" class='avt-btn'>
+				<img id="input_text_4_button_3" class='avt-btn'>
+			</div>
+		</div>
+		<div class="avt-item">
+			<div class="avt-item-label" id="input_text_5_name">5.input field + renew</div>
+			<div class="input-btn-wrap">
+				<input class="avt-item-value" type="text" id="input_text_5">
+				<img id="input_text_5_button_1" class='avt-btn'>
+			</div>
+		</div>
+
+		<div class="avt-item">
+			<div class="avt-item-label" id="input_text_6_name">6.input field + recover + renew</div>
+			<div class="input-btn-wrap">
+				<input class="avt-item-value" type="text" id="input_text_6">
+				<img id="input_text_6_button_1" class='avt-btn'>
+				<img id="input_text_6_button_2" class='avt-btn'>
+			</div>
+		</div>
+		<div class="avt-item">
+			<div class="input-row">
+				<div class="avt-item-label" id="input_text_row_1_name">Title side by side 1</div>
+				<div class="input-btn-wrap">
+					<input class="avt-item-value" type="text" id="input_text_row_1">
+					<img id="input_text_row_1_button_1" class="avt-btn">
+				</div>
+			</div>
+		</div>
+
+		<div class="avt-item">
+			<div class="input-2-input-row">
+				<div class="avt-item-label" id="input_text_row_2_name">Title side by side 2</div>
+				<div class="input-btn-wrap">
+					<div class="avt-item-sub-label" id="input_text_row_2_sub_name_1">1</div>
+					<input type="text" id="input_text_row_sub_1">
+					<div class="avt-item-sub-label" id="input_text_row_2_sub_name_2">2</div>
+					<input type="text" id="input_text_row_sub_2">
+					<img id="input_text_row_2_button_1" class="avt-btn">
+					<img id="input_text_row_2_button_2" class="avt-btn">
+				</div>
+			</div>
+		</div>
+
+
+
+		<!-- ================  Combobox ======================== -->
+		<h3>Combobox</h3>
+		<div class="avt-item">
+			<div class="avt-first-item-label" id="select_1_name">1.Combobox</div>
+			<select class="avt-item-value select" id="select_1_options"></select>
+		</div>
+
+		<div class="avt-item">
+			<div class="avt-item-label" id="select_2_name">2.Combobox + Show tooltip</div>
+			<div class="select-btn-wrap">
+				<select class="avt-item-value select" id="select_2_options"></select>
+				<img id="select_2_button_1" class='avt-btn'>
+			</div>
+		</div>
+
+		<div class="avt-item">
+			<div class="avt-item-label" id="select_3_name">3. Combobox + file browsing + hidden warning icon</div>
+			<div class="select-btn-wrap">
+				<select class="avt-item-value select" id="select_3_options"></select>
+				<input class="avt-item-value" type="file" style="display:none">
+				<img id="select_3_button_1" class='avt-btn'>
+				<img id="select_3_button_2" class='avt-btn'>
+			</div>
+		</div>
+
+		<div class="avt-item">
+			<div class="avt-item-label" id="select_4_name">4.Combobox + file browsing + delete + hidden warning icon
+			</div>
+			<div class="select-btn-wrap">
+				<select class="avt-item-value select" id="select_4_options"></select>
+				<input class="avt-item-value" type="file" style="display:none">
+				<img id="select_4_button_1" class='avt-btn'>
+				<img id="select_4_button_2" class='avt-btn'>
+				<img id="select_4_button_3" class='avt-btn'>
+			</div>
+		</div>
+
+		<div class="avt-item">
+			<div class="avt-item-label" id="select_5_name">5. Combobox + renew + hidden warning icon</div>
+			<div class="select-btn-wrap">
+				<select class="avt-item-value select" id="select_5_options"></select>
+				<img id="select_5_button_1" class='avt-btn'>
+				<img id="select_5_button_2" class='avt-btn'>
+			</div>
+		</div>
+		<div class="avt-item">
+			<div class="avt-item-label" id="select_6_name">6.Combobox + new account + hidden warning icon </div>
+			<div class="select-btn-wrap">
+				<select class="avt-item-value select" id="select_6_options"></select>
+				<img id="select_6_button_1" class='avt-btn'>
+				<img id="select_6_button_2" class='avt-btn'>
+			</div>
+		</div>
+
+		<div class="avt-item">
+			<div class="avt-item-label" id="select_7_name">7.Combobox + new account + renew + hidden warning icon</div>
+			<div class="select-btn-wrap">
+				<select class="avt-item-value select" id="select_7_options"></select>
+				<img id="select_7_button_1" class='avt-btn'>
+				<img id="select_7_button_2" class='avt-btn'>
+				<img id="select_7_button_3" class='avt-btn'>
+			</div>
+		</div>
+
+		<div class="avt-item">
+			<div class="avt-item-label" id="select_8_name">8.Combobox + hidden warning icon </div>
+			<div class="select-btn-wrap">
+				<select class="avt-item-value select" id="select_8_options"></select>
+				<img id="select_8_button_1" class='avt-btn'>
+			</div>
+		</div>
+
+
+
+		<!-- ================  Radio======================== -->
+		<h3>Radio</h3>
+		<div class="avt-item">
+			<div class="avt-item-label" id="radio_1_name">Radio button - Choose one from three(Toggle) </div>
+			<div class="avt-item-value radio_wrap" id="radio_1_options"></div>
+		</div>
+
+		<div class="avt-item">
+			<div class="avt-item-label" id="radio_2_name">Radio button - pick one of two</div>
+			<div class="avt-item-value radio_wrap" id="radio_2_options"></div>
+		</div>
+
+		<h3>Checkbox</h3>
+		<div class="avt-item">
+			<div class="avt-item-label" id="checkbox_1_name">Transition</div>
+			<label class="avt-checkbox" id="checkbox_1">
+				<input type="checkbox" />
+				<span>Override transition...</span>
+			</label>
+		</div>
+
+		<!-- ================  Textarea   ======================== -->
+		<h3>Textarea </h3>
+		<div class="avt-item">
+			<div class="avt-item-label" id="texteditor_1_name">text area + character limit</div>
+			<div id="texteditor_1" class="texteditor-row-wrap">
+				<textarea rows="3" cols="40"></textarea>
+			</div>
+		</div>
+
+		<div class="avt-item">
+			<div class="avt-item-label" id="texteditor_2_name">text area + toolbar</div>
+			<div id="texteditor_2" class="texteditor-row-wrap">
+				<textarea rows="3" cols="40"></textarea>
+				<img id="texteditor_text_3_button_2" class="avt-btn">
+			</div>
+		</div>
+
+		<h3>Integrated elements</h3>
+		<div class="avt-item">
+			<div class="avt-item-label" id="timer12_1_name">time input-1</div>
+			<div class="set-timer-12" id="timer12_1">
+				<select class="avt-item-value time_collection select"></select>
+				<div class="">:</div>
+				<select class="avt-item-value time_collection select"></select>
+				<div class=""></div>
+				<select class="avt-item-value time_collection select">
+					<option value="AM">AM</option>
+					<option value="PM">PM</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="avt-item">
+			<div class="avt-item-label" id="timer24_1_name">time input-2</div>
+			<div class="set-timer-24" id="timer24_1">
+				<select class="avt-item-value time_collection select"></select>
+				<div class="">hr:</div>
+				<select class="avt-item-value time_collection select"></select>
+				<div class="">min:</div>
+				<select class="avt-item-value time_collection select"></select>
+				<div class="">sec</div>
+			</div>
+		</div>
+
+
+	</div>
+</body>
+
+</html>

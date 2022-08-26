@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="component_btn_infor_block_c" transform="translate(-902 -680)">
+    <g id="Group_3912" data-name="Group 3912">
+      <rect id="Rectangle_1373" data-name="Rectangle 1373" width="24" height="24" rx="3" transform="translate(902 680)" fill="#191919"/>
+      <path id="Path_6549" data-name="Path 6549" d="M6.75,9.75h1.5v1.5H6.75Zm0-6h1.5v4.5H6.75ZM7.493,0A7.5,7.5,0,1,0,15,7.5,7.5,7.5,0,0,0,7.493,0ZM7.5,13.5a6,6,0,1,1,6-6A6,6,0,0,1,7.5,13.5Z" transform="translate(921.5 699.5) rotate(180)" fill="#fff"/>
+    </g>
+  </g>
+</svg>
