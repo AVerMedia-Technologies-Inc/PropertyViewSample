@@ -1204,7 +1204,7 @@ propertyEvents.on('set_lable_item', data => {
     "label_name": {
         "id": "label_2_name",
         "name": "Label-2 Name",
-        "font_size": "3px",
+        "font_size": "20px",
         "color": "yellow",
     },
     "label_button_1": {
